@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Venue } from "@/constants/venue";
 import { Rating } from "@mui/material";
+import InteractiveCard from "./InteractiveCard";
 
 interface CardProps {
   venue: Venue;
@@ -22,27 +23,29 @@ const Card: React.FC<CardProps> = ({ venue, onRatingChange }) => {
   };
 
   return (
-    <div className="border rounded-lg pb-4 shadow-md w-64 bg-slate-100 cursor-pointer">
-      <img
-        src={venue.imgSrc}
-        alt={venue.name}
-        className="w-full h-40 object-cover rounded-md"
-      />
-      <div className="px-3">
-        <h3 className="text-lg font-semibold mt-2 text-slate-700">
-          {venue.name}
-        </h3>
-
-        <Rating
-          id={`${venue.name} Rating`}
-          name={`${venue.name} Rating`}
-          data-testid={`${venue.name} Rating`}
-          value={rating}
-          onChange={handleRatingChange}
-          onClick={(e) => e.stopPropagation()}
+    <InteractiveCard>
+      <div className="border rounded-lg pb-4 shadow-md bg-slate-100 cursor-pointer w-full">
+        <img
+          src={venue.imgSrc}
+          alt={venue.name}
+          className="w-full h-40 object-cover rounded-md"
         />
+        <div className="px-3">
+          <h3 className="text-lg font-semibold mt-2 text-slate-700">
+            {venue.name}
+          </h3>
+
+          <Rating
+            id={`${venue.name} Rating`}
+            name={`${venue.name} Rating`}
+            data-testid={`${venue.name} Rating`}
+            value={rating}
+            onChange={handleRatingChange}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
       </div>
-    </div>
+    </InteractiveCard>
   );
 };
 
